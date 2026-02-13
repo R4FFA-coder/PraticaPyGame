@@ -1,18 +1,14 @@
 import pygame
-from pygame.locals import *
-from sys import exit
 
 pygame.init()
+print("Setup Start")
+window = pygame.display.set_mode(size=(1280, 720))
+print("Setup End")
 
-width = 1280
-height = 720
-
-window = pygame.display.set_mode(size=(width, height))
-
+print("Loop Start")
 while True:
-    # # Check for all events
+    # Check for all events
     for event in pygame.event.get():
-        if event.type == QUIT:
+        if event.type == pygame.QUIT:
             pygame.quit()  # Close Window
-            exit()  # Quit Pygame
-    pygame.display.update()
+            quit()  # Quit Pygame
