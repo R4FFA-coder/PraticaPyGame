@@ -1,11 +1,12 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+
 import pygame.image
 from pygame import Surface, Rect
 from pygame.font import Font
-from pygame.locals import QUIT
+from pygame.locals import *
 
-from src.Const import WIN_WIDTH, COLOR_WHITE, COLOR_BLUE, MENU_OPTION
+from src.Const import *
 
 
 class Menu:
@@ -16,23 +17,42 @@ class Menu:
 
 
     def run(self, ):
-
+        menu_option = 0
         pygame.mixer_music.load('./asset/RuasdeSP.wav') # Metodo para carregar musica
         pygame.mixer_music.play(-1) # metodo que coloca a musica em loop
         while True:
             # Detalhe, pensando na lógica de camadas, o texto precisa ser criado depois da imagem, senao a imagem de fundo sobreescreve o que tinha sido criado
             self.window.blit(source=self.surf, dest=self.rect)  # Carrega a imagem e joga no retagunlo que desenhamos
-            self.menu_text(55, 'JOVI', COLOR_WHITE, (WIN_WIDTH / 2, 110)) # Inicializo o metodo para criar o texto
-            self.menu_text(55, 'WAR', COLOR_BLUE, (WIN_WIDTH / 2, 150)) # Inicializo o metodo para criar o texto
+            self.menu_text(80, 'JOVI', COLOR_WHITE, (WIN_WIDTH / 2 - 30, 127)) # Inicializo o metodo para criar o texto
+            self.menu_text(55, 'WAR', COLOR_WHITE, (WIN_WIDTH / 2 + 60, 164)) # Inicializo o metodo para criar o texto
 
             for i in range(len(MENU_OPTION)): # for para iterar com o tamanho da tupla, com um metodo text com um calculo para separar os prints
-                self.menu_text(30, MENU_OPTION[i], (COLOR_BLUE), (WIN_WIDTH / 2, 265 + 30 * i))
-
+                if i == menu_option:
+                    self.menu_text(30, MENU_OPTION[i], COLOR_YELLOW, (WIN_WIDTH / 2, 265 + 30 * i))
+                else:
+                    self.menu_text(30, MENU_OPTION[i], COLOR_BLUE, (WIN_WIDTH / 2, 265 + 30 * i))
             pygame.display.flip()  # Atualiza a imagem para mostrar na janela
+
             for event in pygame.event.get():
                 if event.type == QUIT:
                     pygame.quit()  # Close Window
                     exit()  # Quit Pygame
+                if event.type == KEYDOWN:
+                    if event.key == K_DOWN:
+                        if menu_option < len(MENU_OPTION) - 1:
+                            menu_option += 1
+                        else:
+                            menu_option = 0
+                    if event.key == K_UP:
+                        if menu_option > 0:
+                            menu_option -= 1
+                        else:
+                            menu_option = len(MENU_OPTION) - 1
+                    if event.key == K_RETURN:
+                        return MENU_OPTION[menu_option]
+
+
+
 
     def menu_text(self, text_size: int, text: str, text_color: tuple, text_center_pos: tuple):
         """Metodo que cria texto para o menu
