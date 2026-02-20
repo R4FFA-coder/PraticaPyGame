@@ -16,6 +16,7 @@ class Game:
         clock = pygame.time.Clock()
 
         while True:
+            clock.tick(24)
             menu = Menu(self.window)
             menu.run()
             pass

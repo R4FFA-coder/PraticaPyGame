@@ -22,8 +22,8 @@ class Menu:
         while True:
             # Detalhe, pensando na lógica de camadas, o texto precisa ser criado depois da imagem, senao a imagem de fundo sobreescreve o que tinha sido criado
             self.window.blit(source=self.surf, dest=self.rect)  # Carrega a imagem e joga no retagunlo que desenhamos
-            self.menu_text(55, 'TITULO', (COLOR_WHITE), (WIN_WIDTH / 2, 110)) # Inicializo o metodo para criar o texto
-            self.menu_text(55, 'EM PENSAMENTO', (COLOR_WHITE), (WIN_WIDTH / 2, 150)) # Inicializo o metodo para criar o texto
+            self.menu_text(55, 'JOVI', COLOR_WHITE, (WIN_WIDTH / 2, 110)) # Inicializo o metodo para criar o texto
+            self.menu_text(55, 'WAR', COLOR_BLUE, (WIN_WIDTH / 2, 150)) # Inicializo o metodo para criar o texto
 
             for i in range(len(MENU_OPTION)): # for para iterar com o tamanho da tupla, com um metodo text com um calculo para separar os prints
                 self.menu_text(30, MENU_OPTION[i], (COLOR_BLUE), (WIN_WIDTH / 2, 265 + 30 * i))
